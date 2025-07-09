@@ -13,6 +13,7 @@ def get_jones(
     times: Time,
     freqs: np.ndarray,
     outfile: str = "db_jones.txt",
+    type='hba'
 ):
     pointing = [source.ra.rad, source.dec.rad, "J2000"]
     stid = station_id.strip("LBA").strip("HBA")
@@ -22,7 +23,7 @@ def get_jones(
     timespy, freqs_db, jones, res = on_pointing_axis_tracking(
         "LOFAR",
         stid,
-        "HBA",
+        type.upper(),
         "Hamaker",
         datetime.datetime.fromisoformat(times[0].isot + "Z"),
         duration,

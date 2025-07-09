@@ -95,9 +95,10 @@ def get_jones(
     outfile: str = "eb_jones.txt",
     direction=None,
     refdir=None,
+    type='hba'
 ):
     fname = f"mock_{station_id}.MS"
-    msname = prepare_ms(fname, source, tmpdir=tmpdir)
+    msname = prepare_ms(fname, source, tmpdir=tmpdir, type=type)
     stations = pt.table(msname + "/ANTENNA").getcol("NAME")
     stidx = stations.index(f"{station_id}")
     mybeam, _ = init_beam(msname)
