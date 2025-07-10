@@ -95,7 +95,8 @@ def get_jones(
     outfile: str = "eb_jones.txt",
     direction=None,
     refdir=None,
-    type='hba'
+    type='hba',
+    rotate=True
 ):
     fname = f"mock_{station_id}.MS"
     msname = prepare_ms(fname, source, tmpdir=tmpdir, type=type)
@@ -104,7 +105,7 @@ def get_jones(
     mybeam, _ = init_beam(msname)
     if direction is None or refdir is None:
         jones = get_station_response_phasecenter(
-            mybeam, times, freqs, station_idx=stidx, rotate=True
+            mybeam, times, freqs, station_idx=stidx, rotate=rotate
         )
     else:
         alldirs = get_itrf_dirs(direction)

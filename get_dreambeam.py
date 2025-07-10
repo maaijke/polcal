@@ -13,7 +13,8 @@ def get_jones(
     times: Time,
     freqs: np.ndarray,
     outfile: str = "db_jones.txt",
-    type='hba'
+    type='hba',
+    rotate=True
 ):
     pointing = [source.ra.rad, source.dec.rad, "J2000"]
     stid = station_id.strip("LBA").strip("HBA")
@@ -29,6 +30,7 @@ def get_jones(
         duration,
         timestep,
         pointing,
+        do_parallactic_rot=rotate
     )
     freqs_db = np.array(freqs_db)
     freq_index = np.argmin(np.abs(freqs[np.newaxis] - freqs_db[:, np.newaxis]), axis=0)
